@@ -9,6 +9,14 @@ var Json = document.getElementById('Json');
 var EdHtm = document.getElementById('editorHtm').parentNode;
 var EdJson = document.getElementById('editorJson').parentNode;
 
+var eds = document.getElementsByClassName("eds");
+var edHtm = document.getElementsByClassName("htm");
+var edJson = document.getElementsByClassName("json");
+var selector = document.getElementsByClassName("selector");
+
+Element.prototype.isNodeList = function() {return false;}
+NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = function(){return true;}
+
 // Build our new menu
 var menu = new Menu()
 menu.append(new MenuItem({
@@ -41,27 +49,6 @@ function saveHandler () {
   }
 }
 
-function hide(el) {
-  el.style.display = 'none';
-}
-
-function show(el, value) {
-  el.style.display = value;
-}
-
-function hasClass(el, className) {
-  return el.classList ? el.classList.contains(className) : new RegExp('\\b'+ className+'\\b').test(el.className);
-}
-
-function addClass(el, className) {
-  if (el.classList) el.classList.add(className);
-  else if (!hasClass(el, className)) el.className += ' ' + className;
-}
-
-function removeClass(el, className) {
-  if (el.classList) el.classList.remove(className);
-  else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
-}
 
 var inout = document.getElementById('InOut');
 inout.addEventListener('click', (e) => {
@@ -71,18 +58,20 @@ inout.addEventListener('click', (e) => {
 
 document.getElementById('Htm').addEventListener('click', (e) => {
     e.preventDefault();
-    if (!hasClass(Htm, 'active')) addClass(Htm, 'active');
-    show(EdHtm, 'block');
-    if (hasClass(Json, 'active')) removeClass(Json, 'active');
-    hide(EdJson);
+    removeClass(selector, 'active');
+    hide(eds);
+
+    addClass(Htm, 'active');
+    show(edHtm, 'block');
   }, false)
 
   document.getElementById('Json').addEventListener('click', (e) => {
     e.preventDefault();
-    if (!hasClass(Json, 'active')) addClass(Json, 'active');
-    show(EdJson, 'block');
-    if (hasClass(Htm, 'active')) removeClass(Htm, 'active');
-    hide(EdHtm);
+    removeClass(selector, 'active');
+    hide(eds);
+
+    addClass(Json, 'active');
+    show(edJson, 'block');
   }, false)
 
 jsonInstance.setTheme('ace/theme/twilight');

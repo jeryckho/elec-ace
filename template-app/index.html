@@ -19,15 +19,15 @@
   <div class="window">
 
     <header class="toolbar toolbar-header">
-      <h1 class="title">sans-titre.html</h1>
-      <h1 class="title" style="display: none">sans-titre.json</h1>
+      <h1 class="title eds htm">sans-titre.html</h1>
+      <h1 class="title eds json" style="display: none">sans-titre.json</h1>
 
       <div class="toolbar-actions">
         <div class="btn-group">
-          <button id="Htm" class="btn btn-default active">
+          <button id="Htm" class="btn btn-default selector active">
             <span class="icon icon-doc-text"></span>
           </button>
-          <button id="Json" class="btn btn-default">
+          <button id="Json" class="btn btn-default selector">
             <span class="icon icon-shuffle"></span>
           </button>
         </div>
@@ -46,12 +46,12 @@
     <!-- Your app's content goes inside .window-content -->
     <div class="window-content">
       <div class="pane-group">
-        <div class="pane" style="display: none">
+        <div class="pane eds json" style="display: none">
           <div class="editors" id="editorJson">{
   "Title": "TEST"
 }</div>
         </div>
-        <div class="pane">
+        <div class="pane eds htm">
           <div class="editors" id="editorHtm" >&lt;html&gt;
   &lt;body&gt;
     {{Title}}
@@ -80,6 +80,7 @@
   <script src="js/lib/mode-handlebars.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/lib/mode-hjson.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/lib/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/utils.js" charset="utf-8"></script>
   <script src="js/render.js" charset="utf-8"></script>
 </body>
 
