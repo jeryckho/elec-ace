@@ -7,11 +7,11 @@ var editorInstance = ace.edit('editor');
 // Build our new menu
 var menu = new Menu()
 menu.append(new MenuItem({
-  label: 'Open',
+  label: 'Ouvrir un fichier',
   click: openHandler
 }))
 menu.append(new MenuItem({
-  label: 'SaveAs',
+  label: 'Enregistrer',
   click: saveHandler
 }))
 
@@ -36,18 +36,11 @@ function saveHandler () {
   }
 }
 
-
-// Add the listener
-// document.addEventListener('DOMContentLoaded', function () {
-//   document.querySelector('.js-context-menu').addEventListener('click', function (event) {
-//     menu.popup(getCurrentWindow());
-//   })
-// })
-
-window.addEventListener('contextmenu', (e) => {
-  e.preventDefault()
-  menu.popup(getCurrentWindow())
-}, false)
+var inout = document.getElementById('InOut');
+inout.addEventListener('click', (e) => {
+    e.preventDefault()
+    menu.popup(getCurrentWindow())
+  }, false)
 
 editorInstance.setTheme('ace/theme/twilight');
 editorInstance.session.setMode(new JavaScriptMode());

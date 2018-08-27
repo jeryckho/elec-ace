@@ -1,70 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Photon</title>
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="../css/photon.min.css">
-    <style>
-      #editor { position: absolute; width: 100%; height: 100%; }
-    </style>
-  </head>
-  <body>
-    <div class="window">
+<head>
+  <title>Mustache Templating System</title>
 
-      <!-- .toolbar-header sits at the top of your app -->
-      <header class="toolbar toolbar-header">
-        <h1 class="title">Photon</h1>
-      </header>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/photon.min.css">
+  <style>
+    .editors {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
 
-      <!-- Your app's content goes inside .window-content -->
-      <div class="window-content">
-        <div class="pane-group">
-          <div class="pane pane-sm sidebar">
-            <nav class="nav-group">
-              <h5 class="nav-group-title">Favorites</h5>
-              <span class="nav-group-item">
-                <span class="icon icon-home"></span>
-                connors
-              </span>
-              <span class="nav-group-item active">
-                <span class="icon icon-light-up"></span>
-                Photon
-              </span>
-              <span class="nav-group-item">
-                <span class="icon icon-download"></span>
-                Downloads
-              </span>
-              <span class="nav-group-item">
-                <span class="icon icon-folder"></span>
-                Documents
-              </span>
-              <span class="nav-group-item">
-                <span class="icon icon-window"></span>
-                Applications
-              </span>
-              <span class="nav-group-item">
-                <span class="icon icon-signal"></span>
-                AirDrop
-              </span>
-              <span class="nav-group-item">
-                <span class="icon icon-monitor"></span>
-                Desktop
-              </span>
-            </nav>
-          </div>
+<body>
+  <div class="window">
 
-          <div class="pane">
-            <div id="editor">function test () {}</div>
-          </div>
+    <header class="toolbar toolbar-header">
+      <h1 class="title">sans-titre.js</h1>
+
+      <div class="toolbar-actions">
+        <div class="btn-group">
+          <button class="btn btn-default">
+            <span class="icon icon-doc-text"></span>
+          </button>
+          <button class="btn btn-default active">
+            <span class="icon icon-shuffle"></span>
+          </button>
+        </div>
+
+        <button class="btn btn-default">
+          <span class="icon icon-newspaper icon-text"></span>
+          Afficher
+        </button>
+
+        <button id="InOut" class="btn btn-default btn-dropdown">
+          <span class="icon icon-floppy"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Your app's content goes inside .window-content -->
+    <div class="window-content">
+      <div class="pane-group">
+        <div class="pane">
+          <div class="editors" id="editor">function test () {}</div>
+        </div>
+        <div class="pane" style="display: none">
+          <div class="editors" >function not a test () {}</div>
         </div>
       </div>
     </div>
 
-    <!-- Javascript -->
-    <script src="js/lib/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/lib/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/lib/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/render.js" charset="utf-8"></script>
-  </body>
+    <footer class="toolbar toolbar-footer">
+      <!-- <div class="toolbar-actions">
+        <button class="btn btn-default">
+          Cancel
+        </button>
+
+        <button class="btn btn-primary pull-right">
+          Save
+        </button>
+      </div> -->
+    </footer>
+
+  </div>
+
+  <!-- Javascript -->
+  <script src="js/lib/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/lib/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/lib/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/render.js" charset="utf-8"></script>
+</body>
+
 </html>
