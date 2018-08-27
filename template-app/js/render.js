@@ -1,7 +1,7 @@
 const { getCurrentWindow, dialog, Menu, MenuItem } = require('electron').remote
 var fs = require('fs');
 
-var jsonInstance = ace.edit('editorJson', { mode: "ace/mode/json" });
+var jsonInstance = ace.edit('editorJson', { mode: "ace/mode/hjson" });
 var htmInstance = ace.edit('editorHtm', { mode: "ace/mode/handlebars" });
 
 var Htm = document.getElementById('Htm');
