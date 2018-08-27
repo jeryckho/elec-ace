@@ -19,14 +19,15 @@
   <div class="window">
 
     <header class="toolbar toolbar-header">
-      <h1 class="title">sans-titre.js</h1>
+      <h1 class="title">sans-titre.html</h1>
+      <h1 class="title" style="display: none">sans-titre.json</h1>
 
       <div class="toolbar-actions">
         <div class="btn-group">
-          <button class="btn btn-default">
+          <button id="Htm" class="btn btn-default active">
             <span class="icon icon-doc-text"></span>
           </button>
-          <button class="btn btn-default active">
+          <button id="Json" class="btn btn-default">
             <span class="icon icon-shuffle"></span>
           </button>
         </div>
@@ -45,11 +46,17 @@
     <!-- Your app's content goes inside .window-content -->
     <div class="window-content">
       <div class="pane-group">
-        <div class="pane">
-          <div class="editors" id="editor">function test () {}</div>
-        </div>
         <div class="pane" style="display: none">
-          <div class="editors" >function not a test () {}</div>
+          <div class="editors" id="editorJson">{
+  "Title": "TEST"
+}</div>
+        </div>
+        <div class="pane">
+          <div class="editors" id="editorHtm" >&lt;html&gt;
+  &lt;body&gt;
+    {{Title}}
+  &lt;/body&gt;
+&lt;/html&gt;</div>
         </div>
       </div>
     </div>
@@ -70,7 +77,8 @@
 
   <!-- Javascript -->
   <script src="js/lib/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/lib/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/lib/mode-handlebars.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/lib/mode-json.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/lib/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/render.js" charset="utf-8"></script>
 </body>
