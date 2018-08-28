@@ -6,6 +6,10 @@ var Eds = {
   Htm: ace.edit('editorHtm', { mode: "ace/mode/handlebars" })
 }
 
+var Titres = {
+  Json: document.getElementById('TitreJson'),
+  Htm: document.getElementById('TitreHtm')
+};
 var Ids = {
   Cible: document.getElementById('Cible'),
   InOut: document.getElementById('InOut'),
@@ -39,7 +43,9 @@ function openHandler () {
   if (fileNames !== undefined) {
       var fileName = fileNames[0];
       fs.readFile(fileName, 'utf8', function (err, data) {
-        Eds[Ids["Cible"].innerText].setValue(data);
+        var cible = Ids["Cible"].innerText;
+        Eds[cible].setValue(data);
+        Titres[cible].innerText = fileName;
       });
   }
 }
@@ -48,7 +54,10 @@ function saveHandler () {
   var fileName = dialog.showSaveDialog(getCurrentWindow());
 
   if (fileName !== undefined) {
-      fs.writeFile(fileName, Eds[Ids["Cible"].innerText].getValue(), function(err, data) { });
+      fs.writeFile(fileName, Eds[Ids["Cible"].innerText].getValue(), function(err, data) {
+        var cible = Ids["Cible"].innerText;
+        Titres[cible].innerText = fileName;
+      });
   }
 }
 
