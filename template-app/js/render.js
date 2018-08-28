@@ -1,10 +1,13 @@
 const { getCurrentWindow, dialog, Menu, MenuItem } = require('electron').remote
 var fs = require('fs');
 
-var jsonInstance = ace.edit('editorJson', { mode: "ace/mode/hjson" });
-var htmInstance = ace.edit('editorHtm', { mode: "ace/mode/handlebars" });
+var Eds = {
+  Json: ace.edit('editorJson', { mode: "ace/mode/hjson" }),
+  Htm: ace.edit('editorHtm', { mode: "ace/mode/handlebars" })
+}
 
 var Ids = {
+  Cible: document.getElementById('Cible'),
   InOut: document.getElementById('InOut'),
   Json: document.getElementById('Json'),
   Htm: document.getElementById('Htm')
@@ -36,7 +39,7 @@ function openHandler () {
   if (fileNames !== undefined) {
       var fileName = fileNames[0];
       fs.readFile(fileName, 'utf8', function (err, data) {
-          jsonInstance.setValue(data);
+        Eds[Ids["Cible"].innerText].setValue(data);
       });
   }
 }
@@ -45,14 +48,13 @@ function saveHandler () {
   var fileName = dialog.showSaveDialog(getCurrentWindow());
 
   if (fileName !== undefined) {
-      fs.writeFile(fileName, jsonInstance.getValue(), function(err, data) {
-        
-      });
+      fs.writeFile(fileName, Eds[Ids["Cible"].innerText].getValue(), function(err, data) { });
   }
 }
 
 
 function Select(mode) {
+  Ids["Cible"].innerText = mode;
   removeClass(Clas["Selectors"], 'active');
   hide(Clas["Editors"]);
 
@@ -75,6 +77,5 @@ Ids['Json'].addEventListener('click', (e) => {
     Select('Json');
   }, false)
 
-jsonInstance.setTheme('ace/theme/twilight');
-
-htmInstance.setTheme('ace/theme/twilight');
+Eds['Json'].setTheme('ace/theme/twilight');
+Eds['Htm'].setTheme('ace/theme/twilight');
