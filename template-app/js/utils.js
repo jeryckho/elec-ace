@@ -1,3 +1,6 @@
+Element.prototype.isNodeList = function() {return false;}
+NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = function(){return true;}
+
 function hide(el) {
   show(el, "none");
 }

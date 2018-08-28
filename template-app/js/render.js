@@ -23,9 +23,6 @@ var Clas = {
   Htm: document.getElementsByClassName("htm")
 };
 
-Element.prototype.isNodeList = function() {return false;}
-NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = function(){return true;}
-
 // Build our new menu
 var menu = new Menu()
 menu.append(new MenuItem({
@@ -37,25 +34,50 @@ menu.append(new MenuItem({
   click: saveHandler
 }))
 
-function openHandler () {
-  var fileNames = dialog.showOpenDialog(getCurrentWindow());
+function openHandler() {
+  var cible = Ids["Cible"].innerText;
+  var options = {
+    defaultPath: Titres[cible].innerText,
+    properties: [
+      'openFile'
+    ]
+  };
+  options.filters = (cible === 'Htm') ? [
+    { name: 'Html', extensions: ['htm', 'html', 'htx'] },
+    { name: 'All Files', extensions: ['*'] }
+  ] : [
+    { name: 'JSON', extensions: ['js', 'json', 'hjson'] },
+    { name: 'All Files', extensions: ['*'] }
+  ];
+
+  var fileNames = dialog.showOpenDialog(getCurrentWindow(), options);
 
   if (fileNames !== undefined) {
-      var fileName = fileNames[0];
-      fs.readFile(fileName, 'utf8', function (err, data) {
-        var cible = Ids["Cible"].innerText;
-        Eds[cible].setValue(data);
-        Titres[cible].innerText = fileName;
-      });
+    var fileName = fileNames[0];
+    fs.readFile(fileName, 'utf8', function (err, data) {
+      Eds[cible].setValue(data);
+      Titres[cible].innerText = fileName;
+    });
   }
 }
 
 function saveHandler () {
-  var fileName = dialog.showSaveDialog(getCurrentWindow());
+  var cible = Ids["Cible"].innerText;
+  var options = {
+    defaultPath: Titres[cible].innerText
+  };
+  options.filters = (cible === 'Htm') ? [
+    { name: 'Html', extensions: ['htm', 'html', 'htx'] },
+    { name: 'All Files', extensions: ['*'] }
+  ] : [
+    { name: 'JSON', extensions: ['js', 'json', 'hjson'] },
+    { name: 'All Files', extensions: ['*'] }
+  ];
+
+  var fileName = dialog.showSaveDialog(getCurrentWindow(), options);
 
   if (fileName !== undefined) {
       fs.writeFile(fileName, Eds[Ids["Cible"].innerText].getValue(), function(err, data) {
-        var cible = Ids["Cible"].innerText;
         Titres[cible].innerText = fileName;
       });
   }
