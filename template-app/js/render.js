@@ -9,11 +9,11 @@ function makeW() {
     y:0,
     width: 200,
     height: 100,
-    // show: false
+    show: false
   });
   altWindow.setMenu(null);
   altWindow.on('closed', function() { altWindow = null });
-  // altWindow.once('ready-to-show', function() { altWindow.show(); });
+  altWindow.once('ready-to-show', function() { console.log("dad"); altWindow.show(); });
 }
 
 var Eds = {
@@ -129,9 +129,10 @@ Eds['Htm'].setTheme('ace/theme/twilight');
 
 Ids['Resu'].addEventListener('click', (e) => {
   e.preventDefault();
-  if (altWindow) {
-    altWindow.close();
-  } else {
+  if (!altWindow) {
     makeW();
   }
+  fs.writeFile("tmp.html", Eds["Htm"].getValue(), function(err, data) {
+    altWindow.loadURL('file://' + __dirname + "/tmp.html");
+  });
 }, false)
