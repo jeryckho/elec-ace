@@ -4,15 +4,17 @@ var fs = require('fs');
 var jsonInstance = ace.edit('editorJson', { mode: "ace/mode/hjson" });
 var htmInstance = ace.edit('editorHtm', { mode: "ace/mode/handlebars" });
 
-var Htm = document.getElementById('Htm');
-var Json = document.getElementById('Json');
-var EdHtm = document.getElementById('editorHtm').parentNode;
-var EdJson = document.getElementById('editorJson').parentNode;
-
-var eds = document.getElementsByClassName("eds");
-var edHtm = document.getElementsByClassName("htm");
-var edJson = document.getElementsByClassName("json");
-var selector = document.getElementsByClassName("selector");
+var Ids = {
+  InOut: document.getElementById('InOut'),
+  Json: document.getElementById('Json'),
+  Htm: document.getElementById('Htm')
+};
+var Clas = {
+  Selectors: document.getElementsByClassName("selector"),
+  Editors: document.getElementsByClassName("eds"),
+  Json: document.getElementsByClassName("json"),
+  Htm: document.getElementsByClassName("htm")
+};
 
 Element.prototype.isNodeList = function() {return false;}
 NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = function(){return true;}
@@ -50,28 +52,27 @@ function saveHandler () {
 }
 
 
-var inout = document.getElementById('InOut');
-inout.addEventListener('click', (e) => {
+function Select(mode) {
+  removeClass(Clas["Selectors"], 'active');
+  hide(Clas["Editors"]);
+
+  addClass(Ids[mode], 'active');
+  show(Clas[mode], 'block');
+}
+
+Ids["InOut"].addEventListener('click', (e) => {
     e.preventDefault()
     menu.popup(getCurrentWindow())
   }, false)
 
-document.getElementById('Htm').addEventListener('click', (e) => {
+Ids['Htm'].addEventListener('click', (e) => {
     e.preventDefault();
-    removeClass(selector, 'active');
-    hide(eds);
-
-    addClass(Htm, 'active');
-    show(edHtm, 'block');
+    Select('Htm');
   }, false)
 
-  document.getElementById('Json').addEventListener('click', (e) => {
+Ids['Json'].addEventListener('click', (e) => {
     e.preventDefault();
-    removeClass(selector, 'active');
-    hide(eds);
-
-    addClass(Json, 'active');
-    show(edJson, 'block');
+    Select('Json');
   }, false)
 
 jsonInstance.setTheme('ace/theme/twilight');
