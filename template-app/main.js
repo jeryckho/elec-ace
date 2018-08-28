@@ -19,12 +19,13 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 600,
-    height: 300,
+    width: 1000,
+    height: 600,
     'min-width': 500,
     'min-height': 200,
     'accept-first-mouse': true,
-    'title-bar-style': 'hidden'
+    'title-bar-style': 'hidden',
+    show: false
   });
 
   // and load the index.html of the app.
@@ -38,6 +39,11 @@ app.on('ready', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
+    BrowserWindow.getAllWindows().map( w => { if (w !== mainWindow) w.close(); });
     mainWindow = null;
+  });
+
+  mainWindow.once('ready-to-show', function() {
+    mainWindow.show();
   });
 });

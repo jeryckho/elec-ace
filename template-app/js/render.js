@@ -1,5 +1,20 @@
-const { getCurrentWindow, dialog, Menu, MenuItem } = require('electron').remote
+const { BrowserWindow, getCurrentWindow, dialog, Menu, MenuItem } = require('electron').remote
 var fs = require('fs');
+
+var altWindow = null;
+
+function makeW() {
+  altWindow = new BrowserWindow({
+    x:0,
+    y:0,
+    width: 200,
+    height: 100,
+    // show: false
+  });
+  altWindow.setMenu(null);
+  altWindow.on('closed', function() { altWindow = null });
+  // altWindow.once('ready-to-show', function() { altWindow.show(); });
+}
 
 var Eds = {
   Json: ace.edit('editorJson', { mode: "ace/mode/hjson" }),
@@ -13,6 +28,7 @@ var Titres = {
 var Ids = {
   Cible: document.getElementById('Cible'),
   InOut: document.getElementById('InOut'),
+  Resu: document.getElementById('Resu'),
   Json: document.getElementById('Json'),
   Htm: document.getElementById('Htm')
 };
@@ -110,3 +126,12 @@ Ids['Json'].addEventListener('click', (e) => {
 
 Eds['Json'].setTheme('ace/theme/twilight');
 Eds['Htm'].setTheme('ace/theme/twilight');
+
+Ids['Resu'].addEventListener('click', (e) => {
+  e.preventDefault();
+  if (altWindow) {
+    altWindow.close();
+  } else {
+    makeW();
+  }
+}, false)
