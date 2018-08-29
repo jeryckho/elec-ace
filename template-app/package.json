@@ -1,7 +1,7 @@
 {
-  "name": "proton-template-app",
+  "name": "mustache-templating-app",
   "version": "1.0.0",
-  "description": "A simple template app for Proton",
+  "description": "A simple app to set mustache templates",
   "main": "main.js",
   "author": "Connor Sears",
   "scripts": {
@@ -10,5 +10,8 @@
   "dependencies": {
     "hjson": "^3.1.1",
     "mustache": "^2.3.2"
+  },
+  "devDependencies": {
+    "electron": "^2.0.8"
   }
 }
