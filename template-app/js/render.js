@@ -1,4 +1,6 @@
 const { BrowserWindow, getCurrentWindow, dialog, Menu, MenuItem } = require('electron').remote
+var Mustache = require('mustache');
+var Hjson = require('hjson');
 var fs = require('fs');
 
 var altWindow = null;
@@ -132,7 +134,10 @@ Ids['Resu'].addEventListener('click', (e) => {
   if (!altWindow) {
     makeW();
   }
-  fs.writeFile("tmp.html", Eds["Htm"].getValue(), function(err, data) {
+  var js = Hjson.parse(Eds["Json"].getValue());
+  var tpl = Mustache.render( Eds["Htm"].getValue(), js );
+
+  fs.writeFile("tmp.html", tpl, function(err, data) {
     altWindow.loadURL('file://' + __dirname + "/tmp.html");
   });
 }, false)
